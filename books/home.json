@@ -1,0 +1,23 @@
+{  
+   "pratilipiId":5630253470842880,
+   "title":"தமிழ் வளர்க்க",
+   "titleEn":"Tamil Valarkka",
+   "language":"TAMIL",
+   "author":{  
+      "name":"பமீலா",
+      "pageUrl":"/pameela"
+   },
+   "pageUrl":"/pameela/tamil-valarkka",
+   "coverImageUrl":"http://0.ptlp.co/pratilipi/cover?pratilipiId\u003d5630253470842880\u0026version\u003d1456253382842",
+   "readPageUrl":"/read?id\u003d5630253470842880",
+   "writePageUrl":"/write?id\u003d5630253470842880",
+   "type":"ARTICLE",
+   "state":"PUBLISHED",
+   "listingDateMillis":1453484376263,
+   "reviewCount":40,
+   "ratingCount":85,
+   "averageRating":5.0,
+   "readCount":2865,
+   "fbLikeShareCount":59,
+   "hasAccessToUpdate":false
+}

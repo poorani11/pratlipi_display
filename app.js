@@ -10,7 +10,7 @@ bookApp.config(function ($routeProvider){
         templateUrl: 'pages/home.html',
         controller: 'homeController'
     })
-    .when('/book', {
+    .when('/book/', {
         templateUrl: 'pages/book.html',
         controller: 'bookController'
     })
@@ -19,41 +19,30 @@ bookApp.config(function ($routeProvider){
 // SERVICES
 bookApp.service('idService', function(){
 
-    this.id = "5630253470842880";
+    this.id = "563025347084288";
 
 });
-// bookApp.service('ApiService', ['$resource', '$q', function($resource, $q){
-//     var vm = this;
- 
-//     vm.getApi = function(_id) {
 
-//         return $q(function(resolve, reject) {
+bookApp.factory('JsonService', function($resource) {
+  return $resource('books/home.json',{ }, {
+    getData: {method:'GET', isArray: false}
+  });
+});
 
-//             var resObj = $resource("https://api.fyle.in/api/bank_branches");
-//             var resp = resObj.query({city:_city,offset: 0,limit:50});
-//             resp.$promise.then(function(data){
-//                    console.log('Got data');
-//                    vm.data = data;
-//                    console.log(data);
-//                    resolve('success')
-//                  },function(err){
-//                     console.log(err);
-//                     console.log('error');
-//                     reject('error')
-//             });
-//         })
-//     // console.log($scope.bankResult);
+bookApp.factory('apiService', function($resource) {
+  return $resource('books/review_list.json',{ }, {
+    getData: {method:'GET', isArray: false}
+  });
+});
 
-//     }
-//     vm.getBankData = function(){
-//         return vm.data;
-//     }
-// }]);
 
 
 // CONTROLLERS
-bookApp.controller('homeController', ['$scope','idService', function($scope,idService){
-    $scope.id = idService.city;
+bookApp.controller('homeController', ['$scope','JsonService','idService', function($scope,JsonService,idService){
+     JsonService.get(function(data){
+        console.log(data);
+    $scope.id = data.pratilipiId;
+  });
     $scope.$watch('id', function(){
         idService.id = $scope.id;
 
@@ -61,12 +50,16 @@ bookApp.controller('homeController', ['$scope','idService', function($scope,idSe
    
 }]);
 
-bookApp.controller('bookController', ['$scope','$resource','idService', function($scope,$resource,idService){
-    $scope.id = idService.id;
-   // ApiService.getApi($scope.id)
-   //  .then(function(result) {
-   //      $scope.bankData = ApiService.getBankData();
-        
-   //  })
+bookApp.controller('bookController', ['$scope','$resource','idService','JsonService','apiService', function($scope,$resource,idService,JsonService,apiService){
+    JsonService.get(function(data){
+        $scope.book=data;
+
+    $scope.id = data.pratilipiId;
+  });
+    apiService.query(function(data){
+    $scope.bookReview = data;
+    console.log(data);
+  });
+
 
 }]);

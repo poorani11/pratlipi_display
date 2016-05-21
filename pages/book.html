@@ -1,1 +1,28 @@
-{{id}}
+<div class="container-fluid">
+  <div class="row" id="phones">
+    <div class="col-md-10 thumbnail phone-listing">
+      <img ng-src="{{book.coverImageUrl}}" alt="{{book.title}}" class="thumb" id="thumbhead">
+      <h3>Title:</h3><h5>{{book.title}}</h5>
+      <h3>Title in English:</h3><h5>{{book.titleEn}}</h5>
+      <h3>Book Language:</h3><h5>{{book.language}}</h5>
+      <h3>Author Name:</h3><h5>{{book.author.name}}</h5>
+      <span class="pull-left"><button class="btn btn-md btn-orange">Add  to a Library</button>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col-md-10">
+      <!--Body content-->
+
+      <ul class="phones">
+        <li ng-repeat="review in bookReview | filter:query | orderBy:orderProp"
+            class="thumbnail phone-listing">
+          <img ng-src="{{review.userImageUrl}}" alt="{{review.userName}}" class="thumb" id="thumb">
+          <a>{{review.userName | uppercase}}</a>
+          <p>{{review.review}}</p>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</div>
